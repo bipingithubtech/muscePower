@@ -1,0 +1,157 @@
+/* General overlay styling */
+.recover-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Slightly darker background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Container styling */
+.recover-container {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for a modern look */
+  max-width: 350px;
+  width: 100%;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Form wrapper */
+.recover-form-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Close button */
+.recover-close-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.recover-close-button:hover {
+  background: #e60000;
+  transform: scale(1.1);
+}
+
+/* Headings and description */
+.recover-heading {
+  text-align: center;
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.recover-description {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Form styling */
+.recover-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recover-form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.recover-form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.recover-form-group input {
+  width: 100%;
+  padding: 0.6rem 0.8rem; /* Compact input padding */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.85rem; /* Smaller input text size */
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.recover-form-group input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit button styling */
+.recover-submit-button {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.recover-submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.recover-submit-button:active {
+  transform: translateY(0);
+}
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+
+/* Additional tweaks for responsiveness */
+@media (max-width: 480px) {
+  .recover-container {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .recover-heading {
+    font-size: 1.2rem;
+  }
+
+  .recover-description {
+    font-size: 0.85rem;
+  }
+}
