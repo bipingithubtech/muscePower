@@ -14,14 +14,19 @@ ProductRoutes.post(
 
       // Get uploaded image details
       const image = req.file ? req.file.filename : ""; // Multer saves the filename
+      console.log(req.body);
+      console.log(req.file);
 
+      if (!image) {
+        return res.status(400).json({ message: "Image file not found" });
+      }
       // Create the product
       const createProduct = new Products({
-        image,
+        Image: image,
         description,
         name,
-        price: Number(price),
-        discountPercentage: Number(discountPercentage),
+        price: Number(price) || 0,
+        discountPercentage: Number(discountPercentage) || 0,
       });
 
       // Save the product to the database
@@ -41,3 +46,16 @@ ProductRoutes.post(
     }
   }
 );
+
+ProductRoutes.get("/getAll", async (req, res) => {
+  try {
+    const user = await Products.find({});
+
+    if (user) {
+      res.status(200).json({ message: "all post together", user });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error creating product", error });
+  }
+});

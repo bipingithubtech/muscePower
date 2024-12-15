@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import { Link } from "react-router-dom";
 import "./Home.css"; // Separate CSS file for styling
 import BlockBusterDeals from "./BlockBusterDeals";
+import CreateProduct from "./CreateProduct";
 
 const Home = () => {
   return (
@@ -33,6 +34,9 @@ const Home = () => {
       </div>
       <div>
         <BlockBusterDeals />
+      </div>
+      <div>
+        <CreateProduct />
       </div>
     </div>
   );
