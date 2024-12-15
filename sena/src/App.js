@@ -6,6 +6,7 @@ import Login from "./component/RegistrationPage/Login";
 import { UserProvider } from "./component/storage/Context";
 import RecoverPassword from "./component/RegistrationPage/RecoverPassword";
 import OtpPage from "./component/RegistrationPage/OtpPage";
+import Home from "./component/Home";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
+            <Route path="/" element={<Home />}></Route>
+
             <Route path="/register" element={<Signup />}></Route>
             <Route path="/register-login" element={<Login />}></Route>
             <Route

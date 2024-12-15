@@ -1,0 +1,24 @@
+.carousel {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease, opacity 1s ease; /* Smooth transition effect */
+    transform: scale(1); /* Default scale */
+    opacity: 1; /* Fully visible */
+  }
+  
+  .carousel-image.fade-in {
+    transform: scale(1.1); /* Slight zoom-in animation */
+    opacity: 0.7; /* Slight fade effect during transition */
+  }
+  
