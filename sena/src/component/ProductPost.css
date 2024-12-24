@@ -1,0 +1,257 @@
+/* Main container for the product page */
+.mainProductDiv {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Light background for better contrast */
+}
+
+/* The product section */
+.product {
+  display: flex;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Left filter section */
+.leftFilterSection {
+  width: 25%; /* Slightly smaller to give more room for products */
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Right product section */
+.rightProduct {
+  width: 70%;
+  padding: 15px;
+}
+
+/* Styling for the product header */
+.product h2 {
+  color: #333;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+/* Styling for the "Read More" label */
+.readMoreLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Products section */
+.allProducts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 20px;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Individual product box */
+.myProduct {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  min-height: 380px; /* Adjusted for description visibility */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow for better aesthetics */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Hover effect */
+.myProduct:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Product image styling */
+.productImage {
+  width: 140px;
+  height: 140px;
+  object-fit: contain; /* Maintain aspect ratio */
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9; /* Subtle background for images */
+}
+
+/* Product title */
+.productTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-overflow: ellipsis; /* Ellipsis for long titles */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Product description */
+.productDescription {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+  height: auto; /* Allow full visibility of content */
+  max-height: 80px; /* Limit height */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.myProduct:hover .productDescription {
+  max-height: 200px; /* Expand description on hover */
+}
+
+/* Price styling */
+.productPrice {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  font-size: 14px;
+  color: gray;
+}
+
+.newPrice {
+  font-weight: bold;
+  font-size: 18px;
+  color: #d32f2f;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.addToCartButton {
+  background-color: #f9fafc;
+  color: #111;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.addToCartButton:hover {
+  background-color: #007bff;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.buyButton {
+  background-color: #ffca28;
+  color: #111;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.buyButton:hover {
+  background-color: #ffa726;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #f9fafc;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.pagination button:disabled {
+  background-color: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.leftFilterSection {
+  width: 20%;
+  padding: 15px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.leftFilterSection label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.leftFilterSection input,
+.leftFilterSection select {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -7,6 +7,7 @@ import { UserProvider } from "./component/storage/Context";
 import RecoverPassword from "./component/RegistrationPage/RecoverPassword";
 import OtpPage from "./component/RegistrationPage/OtpPage";
 import Home from "./component/Home";
+import ProductPost from "./component/ProductPost";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               element={<RecoverPassword />}
             ></Route>
             <Route path="/otp" element={<OtpPage />}></Route>
+            <Route path="/product" element={<ProductPost />}></Route>
           </Routes>
         </BrowserRouter>
       </UserProvider>

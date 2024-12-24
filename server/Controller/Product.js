@@ -20,25 +20,30 @@ ProductRoutes.post(
       if (!image) {
         return res.status(400).json({ message: "Image file not found" });
       }
+
       // Create the product
       const createProduct = new Products({
         Image: image,
         description,
         name,
         price: Number(price) || 0,
-        discountPercentage: Number(discountPercentage) || 0,
+        discountPercentage: Number(discountPercentage) || 0, // Assign correctly
       });
 
       // Save the product to the database
       const savedProduct = await createProduct.save();
 
+      // Use the method to calculate the discounted price
       const discountPrice = savedProduct.getDiscountedPrice();
 
       // Send response
       res.status(201).json({
         message: "Product created successfully",
-        product: createProduct,
-        discountPrice,
+        product: {
+          ...savedProduct.toObject(), // Convert Mongoose document to plain object
+          discountPrice, // Include the calculated discounted price in the response
+        },
+        imageUrl: `/image/${image}`, // Include the image URL in the response
       });
     } catch (error) {
       console.error(error);
@@ -49,13 +54,22 @@ ProductRoutes.post(
 
 ProductRoutes.get("/getAll", async (req, res) => {
   try {
-    const user = await Products.find({});
+    const products = await Products.find({});
 
-    if (user) {
-      res.status(200).json({ message: "all post together", user });
+    if (products) {
+      // Add the full image URL to each product
+      const productsWithImageUrl = products.map((product) => ({
+        ...product.toObject(),
+        imageUrl: `/image/${product.Image}`,
+        discountPrice: product.getDiscountedPrice(), // Ensure that image URL is returned correctly
+      }));
+      res.status(200).json({
+        message: "All products fetched successfully",
+        products: productsWithImageUrl,
+      });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error creating product", error });
+    res.status(500).json({ message: "Error fetching products", error });
   }
 });

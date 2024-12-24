@@ -11,12 +11,10 @@ const Home = () => {
       {/* Navigation List */}
       <div className="list">
         <div className="dropdown">
-          <span>All Products</span>
-          <div className="dropdown-content">
-            <p>Product 1</p>
-            <p>Product 2</p>
-            <p>Product 3</p>
-          </div>
+          <Link to={"/product"}>
+            {" "}
+            <span>All Products</span>
+          </Link>
         </div>
         <div className="dropdown">
           <span>Offers</span>

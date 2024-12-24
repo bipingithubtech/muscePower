@@ -3,8 +3,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: sticky; /* Makes the navbar stick to the top */
-    top: 0; /* Sticks the navbar to the top of the viewport */
+    position: sticky;
+    /* Makes the navbar stick to the top */
+    top: 0;
+    /* Sticks the navbar to the top of the viewport */
     z-index: 1000;
     margin: 0;
     padding: 0;
@@ -25,8 +27,8 @@
 
 /* Logo Section */
 .navbar-logo {
-    
-   
+
+
     margin-left: 50px;
 }
 
@@ -39,14 +41,14 @@
 
 /* Search Section */
 .navbar-search {
-   
+
     padding: 5px;
-    flex:.8;
+    flex: .8;
     /* Reduce the width of the search bar */
     margin: 0 10px;
     margin-right: 200px;
-   
-    
+
+
 }
 
 .navbar-search input {
@@ -68,22 +70,27 @@
     justify-content: space-between;
     gap: 30px;
     padding: 10px 20px;
-    background-color: #f8f9fa; /* Subtle light background for better visibility */
+    background-color: #f8f9fa;
+    /* Subtle light background for better visibility */
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for a premium feel */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for a premium feel */
 }
 
 /* Cart Icon Styling */
 .navbar-icon {
     font-size: 28px;
-    color: #ff6f61; /* Attractive reddish-orange color for visibility */
+    color: #ff6f61;
+    /* Attractive reddish-orange color for visibility */
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .navbar-icon:hover {
-    color: #e53e3e; /* Slightly darker red on hover */
-    transform: scale(1.2); /* Enlarge on hover */
+    color: #e53e3e;
+    /* Slightly darker red on hover */
+    transform: scale(1.2);
+    /* Enlarge on hover */
 }
 
 /* Login/Signup Section */
@@ -96,21 +103,26 @@
 .navbar-login h1 {
     font-size: 18px;
     font-weight: 500;
-    color: #2b6cb0; /* Calm blue for text */
+    color: #2b6cb0;
+    /* Calm blue for text */
     margin: 0;
     transition: color 0.3s ease;
     cursor: pointer;
 }
 
 .navbar-login h1:hover {
-    color: #1a365d; /* Darker blue on hover */
-    text-decoration: underline; /* Underline effect for better feedback */
+    color: #1a365d;
+    /* Darker blue on hover */
+    text-decoration: underline;
+    /* Underline effect for better feedback */
 }
 
 /* Logout Button Styling */
 .logout-button {
-    background-color: #e53e3e; /* Reddish background for emphasis */
-    color: #ffffff; /* White text for contrast */
+    background-color: #e53e3e;
+    /* Reddish background for emphasis */
+    color: #ffffff;
+    /* White text for contrast */
     padding: 6px 12px;
     border: none;
     border-radius: 5px;
@@ -121,8 +133,10 @@
 }
 
 .logout-button:hover {
-    background-color: #c53030; /* Slightly darker red on hover */
-    transform: scale(1.1); /* Slightly enlarge button */
+    background-color: #c53030;
+    /* Slightly darker red on hover */
+    transform: scale(1.1);
+    /* Slightly enlarge button */
 }
 
 /* Add responsive styling for smaller screens */

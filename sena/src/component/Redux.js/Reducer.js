@@ -4,8 +4,8 @@ import axios from "axios";
 // Async thunk for creating a product
 export const createProduct = createAsyncThunk(
   "product/createProduct",
-  { rejectWithValue },
-  async (product) => {
+
+  async (product, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/product/createProduct",
@@ -18,17 +18,36 @@ export const createProduct = createAsyncThunk(
   }
 );
 
-export const getAllProduct = createAsyncThunk(
-  "product/getall",
-  async ({ rejectWithValue }) => {
+export const filterProduct = createAsyncThunk(
+  "product/filterProducts",
+  async (filterCriteria, { rejectWithValue }) => {
     try {
-      const res = await axios.get("http://localhost:8000/api/product/getAll");
-      return res.data;
+      const queryParam = new URLSearchParams(filterCriteria).toString();
+      const response = await axios.get(
+        `http://localhost:8000/api/filterProduct/filter?${queryParam}`
+      );
+      console.log("filter data", response.data);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
 );
+
+export const getAllProduct = createAsyncThunk(
+  "product/getall",
+  async (_, { rejectWithValue }) => {
+    // Remove the curly braces around rejectWithValue
+    try {
+      const res = await axios.get("http://localhost:8000/api/product/getAll");
+      console.log("API Response:", res.data.products);
+      return res.data.products;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+// ... existing code ...
 
 // Redux slice for products
 const userDetailSlice = createSlice({
@@ -61,6 +80,17 @@ const userDetailSlice = createSlice({
       .addCase(getAllProduct.rejected, (state, action) => {
         state.loading = false; // Stop loading
         state.error = action.payload; // Capture and store the error
+      })
+      .addCase(filterProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(filterProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = action.payload;
+      })
+      .addCase(filterProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
