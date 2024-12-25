@@ -54,9 +54,6 @@ const ProductPost = () => {
         <div className="leftFilterSection">
           <h4>Filter</h4>
 
-          {/* Category Filter */}
-
-          {/* Price Range Filter */}
           <label>
             Min Price:
             <input

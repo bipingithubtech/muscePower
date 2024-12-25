@@ -13,7 +13,7 @@ export const jwtMiddleware = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.jwt);
 
     req.user = decoded;
-    console.log(decoded);
+    console.log("jwt", decoded);
 
     next();
   } catch (error) {
