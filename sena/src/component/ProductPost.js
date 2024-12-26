@@ -3,6 +3,8 @@ import "../component/ProductPost.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "./Redux.js/Reducer";
 import { filterProduct } from "./Redux.js/Reducer";
+import axios from "axios";
+import Footer from "./Footer";
 
 const ProductPost = () => {
   const [extended, setExtended] = useState(false);
@@ -48,6 +50,20 @@ const ProductPost = () => {
     const { name, value } = e.target;
     setFilter((prev) => ({ ...prev, [name]: value }));
   };
+  const Addcart = async (productId) => {
+    console.log("Adding product ID:", productId); // Debugging
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/cart/Addcart",
+        { productId },
+        { withCredentials: true }
+      );
+      console.log("cart item", response);
+    } catch (error) {
+      console.error("Failed to add to cart", error);
+    }
+  };
+
   return (
     <div className="mainProductDiv">
       <div className="product">
@@ -111,8 +127,8 @@ const ProductPost = () => {
 
           {/* Products Section */}
           <div className="allProducts">
-            {currentPage.map((product) => (
-              <div className="myProduct" key={product.id}>
+            {currentPage.map((product, index) => (
+              <div className="myProduct" key={index}>
                 <img
                   className="productImage"
                   src={`http://localhost:8000${product.imageUrl}`}
@@ -127,7 +143,12 @@ const ProductPost = () => {
                   </p>
                 </div>
                 <div className="buttons">
-                  <button className="addToCartButton">Add to Cart</button>
+                  <button
+                    className="addToCartButton"
+                    onClick={() => Addcart(product._id)}
+                  >
+                    Add to Cart
+                  </button>
                   <button className="buyButton">Buy Now</button>
                 </div>
               </div>
@@ -161,6 +182,9 @@ const ProductPost = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

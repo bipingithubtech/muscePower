@@ -23,6 +23,31 @@
     color: #080a08;
     /* Light background color for better visibility */
 }
+.navbar-cart {
+    position: relative;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -18px;
+    right: -25px;
+    background-color: #f15f24;
+    color: rgb(243, 238, 238);
+    border-radius: 100%;
+    padding: 2px 10px;
+    font-size: 14px;
+  }
+  
+  .navbar-icon {
+    font-size: 30px;
+    color: white;
+  }
+  
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+  }
+  
 
 
 /* Logo Section */
