@@ -35,7 +35,7 @@ const Navbar = () => {
     };
 
     fetchCartCount();
-  }, [token, totalItems, cartCount]); // Re-fetch if token changes (i.e., login or logout)
+  }, [token]); // Re-fetch if token changes (i.e., login or logout)
 
   // Logout function
   const logout = async () => {
@@ -57,12 +57,15 @@ const Navbar = () => {
   return (
     <div className="navbar">
       {/* Logo Section */}
-      <div className="navbar-logo">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsd--nkZuhhlYJhATng1LErs-oeqg7-IqOXRpeKL35bag1e9LZB1B6ifXCQQ0rtFZaKZY&usqp=CAU"
-          alt="Logo"
-        />
-      </div>
+
+      <Link to={"/"}>
+        <div className="navbar-logo">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsd--nkZuhhlYJhATng1LErs-oeqg7-IqOXRpeKL35bag1e9LZB1B6ifXCQQ0rtFZaKZY&usqp=CAU"
+            alt="Logo"
+          />
+        </div>
+      </Link>
 
       {/* Search Section */}
       <div className="navbar-search">
@@ -71,12 +74,14 @@ const Navbar = () => {
 
       {/* Navbar Actions */}
       <div className="navbar-actions">
-        <div className="navbar-cart">
-          <TbShoppingCartHeart className="navbar-icon" />
-          {totalItems > 0 && (
-            <span className="cart-count">{totalItems}</span> // Display total items count
-          )}
-        </div>
+        <Link to={"/cart"}>
+          <div className="navbar-cart">
+            <TbShoppingCartHeart className="navbar-icon" />
+            {totalItems > 0 && (
+              <span className="cart-count">{totalItems}</span> // Display total items count
+            )}
+          </div>
+        </Link>
 
         {token ? (
           <div className="navbar-login">

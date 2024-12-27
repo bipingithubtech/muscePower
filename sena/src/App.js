@@ -8,6 +8,7 @@ import RecoverPassword from "./component/RegistrationPage/RecoverPassword";
 import OtpPage from "./component/RegistrationPage/OtpPage";
 import Home from "./component/Home";
 import ProductPost from "./component/ProductPost";
+import CartItem from "./component/CartItem";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             ></Route>
             <Route path="/otp" element={<OtpPage />}></Route>
             <Route path="/product" element={<ProductPost />}></Route>
+            <Route path="/cart" element={<CartItem />}></Route>
           </Routes>
         </BrowserRouter>
       </UserProvider>

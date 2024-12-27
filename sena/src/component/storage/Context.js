@@ -7,6 +7,7 @@ const UserContext = createContext();
 // Provider component to wrap around components that need access to the user context
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [cart, setCart] = useState([]);
   console.log("token acess:=>", token);
 
   useEffect(() => {
@@ -30,8 +31,26 @@ export const UserProvider = ({ children }) => {
     getAccessToken();
   }, []); // Empty dependency array to run the effect once when the component mounts
 
+  useEffect(() => {
+    const getCart = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8000/api/cart/getAllProduct",
+          { withCredentials: true }
+        );
+        if (res) {
+          setCart(res.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch cart count:", error);
+      }
+    };
+
+    getCart();
+  }, []);
+
   return (
-    <UserContext.Provider value={{ token, setToken }}>
+    <UserContext.Provider value={{ token, setToken, cart, setCart }}>
       {children} {/* Render the child components */}
     </UserContext.Provider>
   );
