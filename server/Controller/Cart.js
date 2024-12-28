@@ -45,3 +45,45 @@ CartRouter.get("/getAllProduct", async (req, res) => {
     res.status(500).json({ message: "Failed to get product to cart", error });
   }
 });
+
+CartRouter.delete("/:productId", jwtMiddleware, async (req, res) => {
+  try {
+    const { productId } = req.params; // Extract productId from the request parameters
+    const userId = req.user?._id; // Ensure req.user is defined
+
+    if (!userId) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    console.log("Params: ", req.params);
+
+    // Find the user's cart
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    // Log the items for debugging
+    // console.log("Cart items before removal: ", cart.items);
+
+    // Remove the product from the items array
+    const updatedItems = cart.items.filter(
+      (item) => (item.productId._id || item.productId).toString() !== productId
+    );
+
+    if (cart.items.length === updatedItems.length) {
+      return res
+        .status(404)
+        .json({ message: "Product not found in cart", cart });
+    }
+
+    // Update the cart's items
+    cart.items = updatedItems;
+    await cart.save();
+
+    res.status(200).json({ message: "Product removed successfully", cart });
+  } catch (error) {
+    console.error("Server error: ", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+});

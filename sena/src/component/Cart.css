@@ -8,6 +8,13 @@
     font-family: "Poppins", sans-serif;
     animation: fadeIn 0.8s ease-in-out;
   }
+  .btn{
+    background-color: #470c01;
+    width: 40%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: capitalize;
+    
+  }
   /* Styling for the backward link */
 .backward {
   display: flex;

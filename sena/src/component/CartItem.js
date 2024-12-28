@@ -3,6 +3,7 @@ import { useUser } from "./storage/Context";
 import "./Cart.css";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CartItem = () => {
   const { cart, setCart } = useUser();
@@ -12,6 +13,25 @@ const CartItem = () => {
 
   const calculateDiscountedPrice = (price, discountPercentage) => {
     return price - (price * discountPercentage) / 100;
+  };
+
+  const deleteItem = async (id) => {
+    try {
+      const res = await axios.delete(`http://localhost:8000/api/cart/${id}`, {
+        withCredentials: true,
+      });
+
+      const uupdatedCart = cart.map((c) => ({
+        ...c,
+        item: c.items.filter((item) => item.productId._id !== id),
+      }));
+      setCart(uupdatedCart);
+    } catch (error) {
+      console.error(
+        "Error removing product:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   return (
@@ -36,13 +56,13 @@ const CartItem = () => {
 
           {/* Cart Items */}
           <div className="cart-items">
-            {cart.items.map((item) => {
+            {cart.items.map((item, index) => {
               const discountedPrice = calculateDiscountedPrice(
                 item.productId.price,
                 item.productId.discountPercentage
               );
               return (
-                <div className="cart-item" key={item._id}>
+                <div className="cart-item" key={index}>
                   <img
                     src={`http://localhost:8000/image/${item.productId.Image} `}
                     alt={item.productId.name}
@@ -64,6 +84,12 @@ const CartItem = () => {
                     <p>
                       Quantity: <span>{item.quantity}</span>
                     </p>
+                    <button
+                      className="btn"
+                      onClick={() => deleteItem(item.productId._id)}
+                    >
+                      remove
+                    </button>
                   </div>
                 </div>
               );
