@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./component/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./component/RegistrationPage/Signup";
@@ -9,10 +9,11 @@ import OtpPage from "./component/RegistrationPage/OtpPage";
 import Home from "./component/Home";
 import ProductPost from "./component/ProductPost";
 import CartItem from "./component/CartItem";
+import ChatSupport from "./component/ChatSupport";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <UserProvider>
         <BrowserRouter>
           <Navbar />
@@ -28,6 +29,7 @@ function App() {
             <Route path="/otp" element={<OtpPage />}></Route>
             <Route path="/product" element={<ProductPost />}></Route>
             <Route path="/cart" element={<CartItem />}></Route>
+            <Route path="/chat-support" element={<ChatSupport />}></Route>
           </Routes>
         </BrowserRouter>
       </UserProvider>
