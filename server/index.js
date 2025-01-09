@@ -59,7 +59,25 @@ app.use("/api/cart", CartRouter);
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
+const predefinedReplies = {
+  hello: "Hi! How can I assist you today?",
+  "i have problem with price issue":
+    "Thank you for reaching out to us. Our team will shortly respond to you.",
+  "call me": "Sure, our team will reach you within 24 hours!",
+  thanks: "You're welcome! Let me know if you need anything else.",
+};
 
+const fallbackResponse =
+  "I'm sorry, I didn't understand that. Could you rephrase?";
+const getBotResponse = (userMessage) => {
+  const lowerCaseMessage = userMessage.toLowerCase();
+  for (const key in predefinedReplies) {
+    if (lowerCaseMessage.includes(key)) {
+      return predefinedReplies[key];
+    }
+  }
+  return fallbackResponse;
+};
 // Socket.IO connection handler
 io.on("connection", (socket) => {
   console.log("Socket connected successfully!");
@@ -67,11 +85,13 @@ io.on("connection", (socket) => {
   // Event to handle chat messages or any other event
   socket.on("chat message", (msg) => {
     console.log("Received message:", msg);
+    const botMessage = getBotResponse(msg);
     // Broadcast the message to all connected clients
-    io.emit("repply from back", msg);
+    setTimeout(() => {
+      socket.emit("repply from back", botMessage);
+    }, 2000);
   });
 
-  // Handle disconnection
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
