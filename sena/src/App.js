@@ -10,6 +10,7 @@ import Home from "./component/Home";
 import ProductPost from "./component/ProductPost";
 import CartItem from "./component/CartItem";
 import ChatSupport from "./component/ChatSupport";
+import AboutPage from "./component/Story";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/product" element={<ProductPost />}></Route>
             <Route path="/cart" element={<CartItem />}></Route>
             <Route path="/chat-support" element={<ChatSupport />}></Route>
+            <Route path="/story" element={<AboutPage />}></Route>
           </Routes>
         </BrowserRouter>
       </UserProvider>

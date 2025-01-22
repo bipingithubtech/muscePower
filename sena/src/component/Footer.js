@@ -6,51 +6,33 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-left">
-          <h2>Company Name</h2>
-          <p>Your tagline or short description goes here.</p>
+          <h2>Health Shope</h2>
+          <p>
+            Your one-stop health e-commerce platform, offering trusted products
+          </p>
+          <p>
+            {" "}
+            personalized care, and a seamless shopping experience. Discover a
+          </p>
+          <p>
+            {" "}
+            healthier you with cutting-edge solutions, affordable prices, and a
+          </p>
+          <p> commitment to your well-being. Wellness, delivered!</p>
         </div>
         <div className="footer-middle">
           <h3>Quick Links</h3>
           <ul>
             <li>
-              <a href="/home">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
-              <a href="/about">About Us</a>
+              <a href="/story">About Us</a>
             </li>
             <li>
-              <a href="/contact">Contact</a>
-            </li>
-            <li>
-              <a href="/blog">Blog</a>
+              <a href="/chat-support">Contact</a>
             </li>
           </ul>
-        </div>
-        <div className="footer-right">
-          <h3>Follow Us</h3>
-          <div className="social-icons">
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa fa-facebook"></i>
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa fa-twitter"></i>
-            </a>
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa fa-instagram"></i>
-            </a>
-          </div>
         </div>
       </div>
       <div className="footer-bottom">

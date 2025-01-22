@@ -20,15 +20,9 @@ const Home = () => {
               <span>All Products</span>
             </Link>
           </div>
-          <div className="dropdown">
-            <span>Offers</span>
-            <div className="dropdown-content">
-              <p>Offer 1</p>
-              <p>Offer 2</p>
-            </div>
-          </div>
+
           <Link to="/chat-support">Chat Support</Link>
-          <Link to="/our-story">Our Story</Link>
+          <Link to="/story">Our Story</Link>
         </div>
         {/* Banner Section */}
         <div className="banner">

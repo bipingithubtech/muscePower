@@ -27,6 +27,17 @@ const ChatSupport = () => {
 
   return (
     <div className="chat-container">
+      <div className="about-section">
+        <h2>About Us</h2>
+        <p>
+          Welcome to Chat Support! We're here to assist you with any questions
+          or concerns you might have. Feel free to ask us anything.
+        </p>
+        <p>
+          Our team is dedicated to providing excellent support and ensuring your
+          satisfaction. Thank you for choosing our service!
+        </p>
+      </div>
       <div className="chat-box">
         <div className="chat-header">Chat Support</div>
         <div className="messages">
