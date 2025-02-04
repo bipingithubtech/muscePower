@@ -88,7 +88,7 @@ io.on("connection", (socket) => {
     // Broadcast the message to all connected clients
     setTimeout(() => {
       socket.emit("repply from back", botMessage);
-    }, 2000);
+    }, 1000);
   });
 
   socket.on("disconnect", () => {

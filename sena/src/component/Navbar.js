@@ -9,8 +9,10 @@ const Navbar = () => {
   const { token, setToken } = useUser();
   const [cartCount, setCartCount] = useState([]); // Use an array to store cart data
   const [totalItems, setTotalItems] = useState(0);
-  console.log("cartitem", cartCount); // State to hold total items count
+  const [searchItem, setSearchItem] = useState("");
+  const [suggestions, setSuggestions] = useState([]); // Renamed to match convention
 
+  console.log(suggestions);
   // Fetch cart data and calculate total items count on component mount or when token changes
   useEffect(() => {
     const fetchCartCount = async () => {
@@ -26,7 +28,6 @@ const Navbar = () => {
 
           // Calculate total items count from the fetched data
           const total = res.data.map((cart) => cart.items.length);
-          // or  .reduce((acc, itemCount) => acc + itemCount, 0);
           setTotalItems(total); // Set the total items count
         } catch (error) {
           console.error("Failed to fetch cart count:", error);
@@ -36,6 +37,22 @@ const Navbar = () => {
 
     fetchCartCount();
   }, [token]); // Re-fetch if token changes (i.e., login or logout)
+
+  const handleSearch = async (term) => {
+    if (term === "") {
+      setSuggestions([]);
+      return;
+    }
+
+    try {
+      const res = await axios.get("http://localhost:8000/api/product/getAll", {
+        params: { search: term },
+      });
+      setSuggestions(res.data.products);
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }
+  };
 
   // Logout function
   const logout = async () => {
@@ -57,11 +74,10 @@ const Navbar = () => {
   return (
     <div className="navbar">
       {/* Logo Section */}
-
       <Link to={"/"}>
         <div className="navbar-logo">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsd--nkZuhhlYJhATng1LErs-oeqg7-IqOXRpeKL35bag1e9LZB1B6ifXCQQ0rtFZaKZY&usqp=CAU"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1ufxJvp5o-mkCWY40ZA-5ZzIdktxfJHUH7RaXCjxZVKEGhehDYSGUwaSBJF6fhJ_LyyA&usqp=CAU"
             alt="Logo"
           />
         </div>
@@ -69,7 +85,25 @@ const Navbar = () => {
 
       {/* Search Section */}
       <div className="navbar-search">
-        <input type="text" placeholder="Type a Product name.e.g ,Biozyme" />
+        <input
+          type="text"
+          value={searchItem}
+          placeholder="Type a Product name, e.g., Biozyme"
+          onChange={(e) => {
+            setSearchItem(e.target.value);
+            handleSearch(e.target.value);
+          }}
+        />
+        {suggestions.length > 0 && (
+          <ul className="suggestions-list">
+            {suggestions.map((suggest, index) => (
+              <li key={index} className="suggestion-item">
+                {suggest.name}{" "}
+                {/* Assuming the suggestion object has a 'name' field */}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       {/* Navbar Actions */}

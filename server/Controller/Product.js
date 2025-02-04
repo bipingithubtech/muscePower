@@ -54,9 +54,13 @@ ProductRoutes.post(
 
 ProductRoutes.get("/getAll", async (req, res) => {
   try {
-    const products = await Products.find({});
+    const { search } = req.query;
 
-    if (products) {
+    const filter = search ? { name: { $regex: search, $options: "i" } } : {};
+
+    const products = await Products.find(filter);
+
+    if (products.length > 0) {
       // Add the full image URL to each product
       const productsWithImageUrl = products.map((product) => ({
         ...product.toObject(),
