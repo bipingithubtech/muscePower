@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../RegistrationPage/Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // Corrected the import statement here
+import axios from "axios";
 import { useUser } from "../storage/Context";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { token, setToken } = useUser(null);
@@ -10,7 +11,8 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState(null); // Added error state for displaying error messages
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const setlogin = (e) => {
@@ -23,7 +25,7 @@ const Login = () => {
   };
 
   const onLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     try {
       const res = await axios.post(
@@ -34,16 +36,16 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      // On successful login, redirect to the home page
+
       console.log(res.data, "loginsucessfull");
       setToken(res.data);
-      navigate("/"); // Navigate to home page after login
+      navigate("/");
     } catch (err) {
       console.error(
         "Error while sending post request to backend:",
         err.response ? err.response.data : err.message
       );
-      // Update error state to display the error message
+
       setError(
         err.response
           ? err.response.data.message
@@ -51,11 +53,12 @@ const Login = () => {
       );
     }
   };
-
+  const toggle = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
     <div className="overlay">
       <div className="login-container">
-        {/* Left Section */}
         <div className="left-login">
           <img
             src="https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -64,10 +67,9 @@ const Login = () => {
           />
         </div>
 
-        {/* Right Section */}
         <div className="right-login">
           <Link to="/">
-            <button className="close-button">&times;</button>
+            <button className="close-button">x</button>
           </Link>
           <h1>Welcome Back!</h1>
           <form className="login-form" onSubmit={onLogin}>
@@ -83,16 +85,20 @@ const Login = () => {
             </div>
             <div>
               <label>Password</label>
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={value.password}
-                onChange={setlogin}
-              />
+              <div class="mb-4 flex">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  value={value.password}
+                  onChange={setlogin}
+                />
+                <span onClick={toggle}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
             </div>
 
-            {/* Error Message Display */}
             {error && <div className="error-message">{error}</div>}
 
             <button className="login-button">Login</button>

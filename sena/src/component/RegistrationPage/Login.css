@@ -1,4 +1,4 @@
-/* Overlay styling */
+
 .overlay {
     position: fixed;
     top: 0;
@@ -11,8 +11,38 @@
     align-items: center;
     z-index: 1000;
   }
+
+.mb-4 {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mb-4 input {
+  flex: 1;
+  padding-right: 40px; 
+}
+
+.mb-4 span {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 18px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.mb-4 span:hover {
+  color: #007bff;
+  transform: scale(1.2);
+}
+
+.mb-4 span:active {
+  transform: scale(1);
+}
+
   
-  /* Login container */
+
   .login-container {
     display: flex;
     width: 50%;
@@ -22,7 +52,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
-  /* Left section styling */
+
   .left-login {
     flex: 1;
   }
@@ -33,14 +63,14 @@
     object-fit: cover;
   }
   
-  /* Right section styling */
+
   .right-login {
     flex: 1;
     padding: 20px;
-    position: relative; /* To position the close button inside this div */
+    position: relative; 
   }
   
-  /* Close button styling */
+
   .close-button {
     position: absolute;
     top: 10px;
@@ -54,11 +84,35 @@
     transition: color 0.3s ease;
   }
   
-  .close-button:hover {
-    color: #007bff;
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 4px;
+    background-color: #f8f9fa; /* Light gray for better visibility */
+    
+    color: #333;
+    font-size: 18px; /* Reduced font size for better proportion */
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   }
   
-  /* Login form styling */
+  .close-button:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: scale(1.1); /* Slight enlargement effect */
+  }
+  
+  .close-button:active {
+    transform: scale(1);
+  }
+  
+
   .login-form {
     margin-top: 20px;
   }
@@ -90,6 +144,7 @@
     cursor: pointer;
     transition: background 0.3s ease;
   }
+
   
   .login-form .login-button:hover {
     background: #0056b3;

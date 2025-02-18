@@ -1,4 +1,4 @@
-/* Cart Container */
+
 .cart-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -10,6 +10,33 @@
   animation: fadeIn 0.8s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+.dropbox {
+  width: 100%;
+  height: 150px;
+  background-color: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 30px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dropbox:hover {
+  background-color: #e8e8e8;
+  border-color: #aaa;
+}
+
+.droppable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 /* Button */
 .btn {
@@ -112,7 +139,7 @@
 /* Cart Items Grid */
 .cart-items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 2fr));
   gap: 25px;
   margin-top: 30px;
 }
