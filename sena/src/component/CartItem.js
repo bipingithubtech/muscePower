@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useUser } from "./storage/Context"; // Assuming useUser is your context hook
+import { useUser } from "./storage/Context";
 import "./Cart.css";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { DndContext, useDraggable } from "@dnd-kit/core";
 import Dragbox from "./Dragbox";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-// Draggable component
 const Draggable = ({ id, children }) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id,
-  });
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
 
   const style = {
     transform: transform
@@ -26,44 +26,47 @@ const Draggable = ({ id, children }) => {
 };
 
 const CartItem = () => {
-  const { cart: initialCart } = useUser(); // Getting cart from context (if it's provided)
-  const [cart, setCart] = useState(initialCart || []); // Setting cart in state
+  const { cart: initialCart } = useUser();
+  const [cart, setCart] = useState(initialCart || []);
 
-  // Effect hook to log cart structure when cart changes
   useEffect(() => {
     if (cart) {
       console.log("Cart Structure: ", cart);
       cart.forEach((cartItem, index) => {
         console.log(`Cart Item ${index}: `, cartItem);
-        cartItem.items?.forEach((item, itemIndex) => {
-          console.log(`Item ${itemIndex} ID: `, item._id);
-        });
       });
     }
   }, [cart]);
 
-  // Calculate discounted price
   const calculateDiscountedPrice = (price, discountPercentage) => {
     return price - (price * discountPercentage) / 100;
   };
 
-  // Handle drag end event
-  const handleDragEnd = (event) => {
+  const handleDragEnd = async (event) => {
     const { active, over } = event;
+
     if (over && over.id === "drop-area") {
-      console.log(`Item ${active.id} was dropped into the drop area`);
-
       try {
-      } catch (error) {}
-      const updatedCart = cart.map((cartItem) => ({
-        ...cartItem,
-        items: cartItem.items.filter(
-          (item) => item.productId._id !== active.id
-        ),
-      }));
+        await axios.delete(`http://localhost:8000/api/cart/${active.id}`, {
+          withCredentials: true,
+        });
 
-      // Update the cart state with the updated cart
-      setCart(updatedCart);
+        const updatedCart = cart.map((cartItem) => ({
+          ...cartItem,
+          items: cartItem.items.filter(
+            (item) => item.productId._id !== active.id
+          ),
+        }));
+
+        setCart(updatedCart);
+
+        toast.success("Product deleted successfully", {
+          position: "top-right",
+          autoClose: 500,
+        });
+      } catch (error) {
+        console.error("Error deleting item:", error);
+      }
     }
   };
 
@@ -128,6 +131,10 @@ const CartItem = () => {
             </div>
           </div>
         ))}
+        <ToastContainer
+          className="custom-toast-container"
+          position="top-center"
+        />
 
         <Dragbox>
           <div className="dropbox">Drop items here</div>
