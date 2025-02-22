@@ -6,6 +6,7 @@ import path from "path";
 import http from "http";
 import { fileURLToPath } from "url";
 import { Server } from "socket.io"; // Correct import for Socket.IO
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Import Routes
 import { FilterRouter } from "./Controller/Filter.js";
@@ -15,28 +16,28 @@ import { OtpRouter } from "./Controller/OptRotes.js";
 import { ProductRoutes } from "./Controller/Product.js";
 import { ProductRatingRouter } from "./Controller/Rating.js";
 import { CartRouter } from "./Controller/Cart.js";
+import ChattingModel from "./Schema/ChattingModel.js";
+import { ChatRouter } from "./Controller/ChatAPi.js";
 
-// Environment variables
 dotenv.config();
 
 const app = express();
+const genAI = new GoogleGenerativeAI(process.env.ai);
 
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Frontend URL (update if needed)
+    origin: "http://localhost:3000",
     credentials: true,
   },
 });
 
-// Get the directory path for serving images
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files from the "image" directory
 app.use("/image", express.static(path.join(__dirname, "image")));
 
-// Middleware setup
 app.use(express.json());
 app.use(cookieParser());
 
@@ -53,52 +54,61 @@ app.use("/api/product", ProductRoutes);
 app.use("/api/rating", ProductRatingRouter);
 app.use("/api/filterProduct", FilterRouter);
 app.use("/api/cart", CartRouter);
+app.use("/api/chat", ChatRouter);
 
-// Test Route
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
-const predefinedReplies = {
-  hello: "Hi! How can I assist you today?",
-  "i have problem with price issue":
-    "Thank you for reaching out to us. Our team will shortly respond to you.",
-  "call me": "Sure, our team will reach you within 24 hours!",
-  thanks: "You're welcome! Let me know if you need anything else.",
-};
+const generateAIResponse = async (message) => {
+  try {
+    const result = await model.generateContentStream(message);
+    let aiResponse = "";
 
-const fallbackResponse =
-  "I'm sorry, I didn't understand that. Could you rephrase?";
-const getBotResponse = (userMessage) => {
-  const lowerCaseMessage = userMessage.toLowerCase();
-  for (const key in predefinedReplies) {
-    if (lowerCaseMessage.includes(key)) {
-      return predefinedReplies[key];
+    for await (const chunk of result.stream) {
+      aiResponse += chunk.text();
     }
-  }
-  return fallbackResponse;
-};
-// Socket.IO connection handler
-io.on("connection", (socket) => {
-  console.log("Socket connected successfully!");
 
-  // Event to handle chat messages or any other event
-  socket.on("chat message", (msg) => {
-    console.log("Received message:", msg);
-    const botMessage = getBotResponse(msg);
-    // Broadcast the message to all connected clients
-    setTimeout(() => {
-      socket.emit("repply from back", botMessage);
-    }, 1000);
+    return aiResponse || "Sorry, I couldn't understand that.";
+  } catch (error) {
+    console.error("AI Error:", error.message);
+    return "AI is currently unavailable.";
+  }
+};
+
+io.on("connection", (socket) => {
+  console.log("New client connected:", socket.id);
+
+  socket.on("chat message", async ({ userId, message }) => {
+    console.log("Received message:", message, "and user is:", userId);
+
+    await ChattingModel.findOneAndUpdate(
+      { userId },
+      {
+        $push: {
+          messages: { text: message, sender: "user", timestamp: new Date() },
+        },
+      },
+      { upsert: true, new: true }
+    );
+
+    const botReply = await generateAIResponse(message);
+
+    io.emit("reply from back", { text: botReply, sender: "AI" });
+    await ChattingModel.findOneAndUpdate(
+      { userId },
+      {
+        $push: {
+          messages: { text: botReply, sender: "AI", timestamp: new Date() },
+        },
+      },
+      { upsert: true, new: true }
+    );
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    console.log("Client disconnected:", socket.id);
   });
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-  DatabaseConfig(); // Your database setup
+  DatabaseConfig();
   console.log(`Server is running on port ${PORT}`);
 });

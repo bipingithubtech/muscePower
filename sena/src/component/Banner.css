@@ -1,7 +1,7 @@
 .carousel {
     width: 100%;
-    height: 600px;
-    overflow: hidden;
+    height: 500px;
+   
     position: relative;
     display: flex;
     align-items: center;
@@ -11,7 +11,7 @@
   .carousel-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit:cover;
     transition: transform 1s ease, opacity 1s ease; /* Smooth transition effect */
     transform: scale(1); /* Default scale */
     opacity: 1; /* Fully visible */

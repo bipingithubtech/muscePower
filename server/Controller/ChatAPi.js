@@ -1,15 +1,17 @@
 import express from "express";
-import { getChatResponse } from "../chatUtility.js";
+import ChattingModel from "../Schema/ChattingModel.js";
+import { jwtMiddleware } from "../Middleware/jwtToken.js";
 
 export const ChatRouter = express.Router();
 
-ChatRouter.post("/chating", async (req, res) => {
-  const userMessage = req.body.message;
+ChatRouter.get("/:userId", jwtMiddleware, async (req, res) => {
+  const { userId } = req.params;
 
   try {
-    const botResponse = await getChatResponse(userMessage);
-    res.json({ reply: botResponse });
-  } catch {
-    res.status(500).json({ error: "Failed to process the message." });
+    const chat = await ChattingModel.findOne({ userId });
+    res.json(chat ? chat.messages : []);
+  } catch (error) {
+    console.error("Error fetching chat:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
