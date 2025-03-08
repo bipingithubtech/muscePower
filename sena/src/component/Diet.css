@@ -138,18 +138,19 @@
     position: relative;
     width: 200px;
     height: 100px;
-    border-top-left-radius: 100px;
-    border-top-right-radius: 100px;
+    border-top-left-radius: 130px;
+    border-top-right-radius: 130px;
+    border-top:80px;
    
     margin: 20px auto;
     overflow: hidden;
     background: linear-gradient(
       to right,
-      #e4ecf5 0%,
-      #3291f0 25%,  /* Underweight - Blue */
-      #baf3bc 25%,
-      #66f86b 50%,  /* Normal - Green */
-      #f1e09a 50%,
+      #83b2e9 0%,
+      #6bf5b5 25%,  /* Underweight - Blue */
+      #a4f7a7 25%,
+      #91ec67 50%,  /* Normal - Green */
+      #f0de95 50%,
       #f5cd2d 75%,  /* Overweight - Yellow */
       #f77d7d 75%,
       #970202 100%  /* Obese - Red */

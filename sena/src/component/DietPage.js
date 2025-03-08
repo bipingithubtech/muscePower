@@ -2,6 +2,7 @@ import React from "react";
 import "../component/Diet.css";
 import { useState } from "react";
 import { useRef } from "react";
+import DietPlane from "./DietPlane";
 
 const DietPage = () => {
   const [bmi, setBmi] = useState(null);
@@ -23,21 +24,22 @@ const DietPage = () => {
     setBmi(bmiVlaue);
     let newrotaion = 0;
     if (bmiVlaue < 18.5) {
-      setCategory("Underweight");
+      setCategory("underweight");
       newrotaion = -60;
     } else if (bmiVlaue >= 18.5 && bmiVlaue < 24.9) {
-      setCategory("Normal");
+      setCategory("normal");
       newrotaion = 0;
     } else if (bmiVlaue >= 25 && bmiVlaue < 29.9) {
-      setCategory("Overweight");
+      setCategory("overweight");
       newrotaion = 30;
     } else {
-      setCategory("Obese");
+      setCategory("obese");
 
       newrotaion = 60;
     }
     setRotation(newrotaion);
   };
+
   return (
     <div className="maindiv">
       <div className="header">
@@ -139,7 +141,9 @@ const DietPage = () => {
           <p>{bmi ? `BMI: ${bmi} - ${category}` : "Enter details"}</p>
         </div>
       </div>
-      <div className="dietPlanDive"></div>
+      <div className="dietPlanDive">
+        <DietPlane category={category} />
+      </div>
     </div>
   );
 };
