@@ -11,6 +11,7 @@ import ProductPost from "./component/ProductPost";
 import CartItem from "./component/CartItem";
 import ChatSupport from "./component/ChatSupport";
 import AboutPage from "./component/Story";
+import DietPage from "./component/DietPage";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/cart" element={<CartItem />}></Route>
             <Route path="/chat-support" element={<ChatSupport />}></Route>
             <Route path="/story" element={<AboutPage />}></Route>
+            <Route path="/diet" element={<DietPage />}></Route>
           </Routes>
         </BrowserRouter>
       </UserProvider>

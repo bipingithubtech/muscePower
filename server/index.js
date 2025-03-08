@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import http from "http";
 import { fileURLToPath } from "url";
-import { Server } from "socket.io"; // Correct import for Socket.IO
+import { Server } from "socket.io";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Import Routes
@@ -18,6 +18,7 @@ import { ProductRatingRouter } from "./Controller/Rating.js";
 import { CartRouter } from "./Controller/Cart.js";
 import ChattingModel from "./Schema/ChattingModel.js";
 import { ChatRouter } from "./Controller/ChatAPi.js";
+import { DietRouter } from "./Controller/CreateDietPlane.js";
 
 dotenv.config();
 
@@ -55,6 +56,7 @@ app.use("/api/rating", ProductRatingRouter);
 app.use("/api/filterProduct", FilterRouter);
 app.use("/api/cart", CartRouter);
 app.use("/api/chat", ChatRouter);
+app.use("/api/diet", DietRouter);
 
 const generateAIResponse = async (message) => {
   try {

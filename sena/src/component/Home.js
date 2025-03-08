@@ -23,6 +23,7 @@ const Home = () => {
 
           <Link to="/chat-support">Chat Support</Link>
           <Link to="/story">Our Story</Link>
+          <Link to="/diet">Diet Plan</Link>
         </div>
         {/* Banner Section */}
         <div className="banner">

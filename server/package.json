@@ -24,6 +24,7 @@
     "nodemailer": "^6.9.16",
     "openai": "^4.85.2",
     "react-toastify": "^10.0.6",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "stripe": "^17.7.0"
   }
 }

@@ -1,0 +1,239 @@
+.maindiv {
+    background-color: rgb(220, 210, 230);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    max-width: 900px;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.header h1 {
+    color: rgb(19, 1, 36);
+    font-size: 2rem;
+}
+
+
+.Bmi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+   
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+}
+
+/* BMI Calculator Box */
+.bmicalcultor {
+    background: linear-gradient(135deg, #cac3e7, #c296eb);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+  
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Table Styling */
+.bmicalcultor table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+
+
+
+.bmicalcultor label {
+    font-weight: bold;
+    margin-bottom: 5px;
+   
+}
+/* Ensure checkboxes are in one line */
+.bmicalcultor input[type="checkbox"] {
+    display: inline-block;
+    width: auto;  /* Keep them small */
+    margin-right: 10px; /* Add spacing */
+    transform: scale(1); /* Optional: Adjust size */
+}
+
+/* Fix table row issue */
+.bmicalcultor tr {
+    display: table-row; /* Keep table structure */
+    width: 100%;
+}
+
+.bmicalcultor td {
+    display: table-cell; /* Make sure they stay in row format */
+    padding: 5px;
+}
+
+.bmicalcultor input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Row */
+.button-row {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.button-row button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin: 5px;
+}
+
+.calculate {
+    background-color: #0c011f;
+    color: white;
+}
+
+.calculate:hover {
+    background-color: #838ae9;
+}
+
+.clear {
+    background-color: #1a0200;
+    color: white;
+}
+
+.clear:hover {
+    background-color: #d32f2f;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 220px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.gauge-container {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+   
+    margin: 20px auto;
+    overflow: hidden;
+    background: linear-gradient(
+      to right,
+      #e4ecf5 0%,
+      #3291f0 25%,  /* Underweight - Blue */
+      #baf3bc 25%,
+      #66f86b 50%,  /* Normal - Green */
+      #f1e09a 50%,
+      #f5cd2d 75%,  /* Overweight - Yellow */
+      #f77d7d 75%,
+      #970202 100%  /* Obese - Red */
+    );
+  }
+  
+  .gauge {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .needle {
+    position: absolute;
+    width: 4px;
+    height: 80px;
+    background: rgb(17, 17, 17);
+    transform-origin: bottom center;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    bottom: -20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+  }
+  
+  .labels span {
+    width: 25%;
+  }
+  
+  .underweight {
+    color: #4da6ff;
+  }
+  
+  .normal {
+    color: #4caf50;
+  }
+  
+  .overweight {
+    color: #ffcc00;
+  }
+  
+  .obese {
+    color: #ff3333;
+  }
+  
+
+  .category-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin: 10px auto;
+    font-size: 14px;
+    font-weight: bold;
+    gap: 5px;
+  }
+  
+  .category-labels span {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .category-labels .underweight {
+    color: #278aee;
+  }
+  
+  .category-labels .normal {
+    color: #19d41f;
+  }
+  
+  .category-labels .overweight {
+    color: #b49103;
+  }
+  
+  .category-labels .obese {
+    color: #4e0101;
+  }

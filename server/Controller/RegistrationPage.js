@@ -26,9 +26,12 @@ UserRotes.post("/signUp", async (req, res) => {
     const savedUser = await newUser.save();
     console.log(savedUser);
     if (savedUser) {
+      const uerWithotPsaaword = await User.findById(savedUser._id).select(
+        "-password"
+      );
       res.status(200).json({
         message: "Successfully added",
-        data: savedUser, // Return the saved user data
+        data: uerWithotPsaaword,
       });
     } else {
       res.status(500).json({
