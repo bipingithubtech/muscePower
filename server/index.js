@@ -23,7 +23,7 @@ import { DietRouter } from "./Controller/CreateDietPlane.js";
 dotenv.config();
 
 const app = express();
-const genAI = new GoogleGenerativeAI(process.env.ai);
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const server = http.createServer(app);

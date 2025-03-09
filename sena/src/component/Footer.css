@@ -15,6 +15,9 @@
     position: relative;
     bottom: 0;
     width: 100%;
+
+   
+
   }
   
   /* Footer inner content */
@@ -30,7 +33,7 @@
   /* Footer left */
   .footer-left h2 {
     font-size: 1.8rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #f1c40f;
   }
   

@@ -3,6 +3,8 @@ import "../component/Diet.css";
 import { useState } from "react";
 import { useRef } from "react";
 import DietPlane from "./DietPlane";
+import Footer from "./Footer";
+import "./Footer.css";
 
 const DietPage = () => {
   const [bmi, setBmi] = useState(null);
@@ -144,6 +146,8 @@ const DietPage = () => {
       <div className="dietPlanDive">
         <DietPlane category={category} />
       </div>
+
+      <Footer />
     </div>
   );
 };
