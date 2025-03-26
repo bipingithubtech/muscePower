@@ -6,6 +6,8 @@ import { filterProduct } from "./Redux.js/Reducer";
 import axios from "axios";
 import Footer from "./Footer";
 
+console.log("hiiiii");
+cons;
 const ProductPost = () => {
   const [extended, setExtended] = useState(false);
   const [filter, setFilter] = useState({

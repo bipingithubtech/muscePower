@@ -172,7 +172,7 @@
     height: 80px;
     background: rgb(17, 17, 17);
     transform-origin: bottom center;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1s ease-in-out;
   }
   
   .labels {

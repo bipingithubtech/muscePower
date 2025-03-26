@@ -3,6 +3,7 @@ import "../RegistrationPage/register.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const [value, setValue] = useState([
@@ -12,6 +13,7 @@ const Signup = () => {
       password: " ",
     },
   ]);
+  const [showPassword, setShowPassowrd] = useState(true);
 
   const navigate = useNavigate();
 
@@ -49,7 +51,9 @@ const Signup = () => {
       );
     }
   };
-
+  const toggle = () => {
+    setShowPassowrd((prev) => !prev);
+  };
   return (
     <div className="overlay">
       <div className="signup-container">
@@ -89,15 +93,18 @@ const Signup = () => {
                 value={value.email}
               />
             </div>
-            <div>
+            <div className="passwordsd">
               <label>Password</label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 name="password"
                 onChange={onsetvalue}
                 value={value.password}
               />
+              <span onClick={toggle}>
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </span>
             </div>
             <button className="signup-button">Sign Up</button>
             <p>

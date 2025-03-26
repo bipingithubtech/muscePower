@@ -94,7 +94,7 @@ const Login = () => {
                   onChange={setlogin}
                 />
                 <span onClick={toggle}>
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
                 </span>
               </div>
             </div>

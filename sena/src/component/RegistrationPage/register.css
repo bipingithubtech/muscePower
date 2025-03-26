@@ -11,6 +11,16 @@
     align-items: center;
     z-index: 1000;
   }
+
+.passwordsd span {
+    position: absolute;
+    right: 25px;
+    
+    cursor: pointer;
+    color: #555;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
   
   /* Signup container */
   .signup-container {
